@@ -31,7 +31,7 @@ class ProductControllerTest {
     client = WebTestClient
         .bindToApplicationContext(applicationContext)
         .configureClient()
-        .baseUrl("/products")
+        .baseUrl("/api/products")
         .build();
 
     Flux<Product> initData = productRepository.deleteAll()

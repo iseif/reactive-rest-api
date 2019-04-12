@@ -28,7 +28,7 @@ class ProductControllerTest {
     client = WebTestClient
         .bindToController(new ProductController(productService))
         .configureClient()
-        .baseUrl("/products")
+        .baseUrl("/api/products")
         .build();
 
     expectedProducts = Arrays.asList(

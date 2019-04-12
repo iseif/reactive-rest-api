@@ -4,30 +4,32 @@ import static org.mockito.Mockito.when;
 
 import dev.iseif.reactiverestapi.model.Product;
 import dev.iseif.reactiverestapi.repository.ProductRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.reactivestreams.Publisher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 class ProductServiceTest {
 
   private final Product product1 = Product.builder().title("Apple iPhone XS Max").description("New iPhone XS Max").price(1099.99).build();
   private final Product product2 = Product.builder().title("Apple MacBook Pro").description("New MacBook").price(2599.99).build();
   private final Product product3 = Product.builder().title("Samsung Galaxy S10+").description("New Galaxy!!").price(799.99).build();
 
-  @MockBean
+  @Mock
   private ProductRepository productRepository;
 
-  @Autowired
   private ProductService productService;
+
+  @BeforeEach
+  void setUp() {
+    productService = new ProductService(productRepository);
+  }
 
   @Test
   void getAll() {
